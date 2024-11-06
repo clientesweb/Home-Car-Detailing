@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Car Detailing - Detallado Profesional a Domicilio</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Experimente servicios de detallado automotriz premium por su detallador de confianza. Especializado en detallado de alta calidad y servicios profesionales de limpieza automotriz.">
+    <meta name="keywords" content="detallado de autos, detallado automotriz, detallado profesional, detallado a domicilio, limpieza premium">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://homecardetailing.com/">
+    <meta property="og:title" content="Home Car Detailing - Detallado Profesional a Domicilio">
+    <meta property="og:description" content="Su detallador de confianza desde 2007. Especializado en servicios de detallado premium.">
+    <meta property="og:image" content="img/logo.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://homecardetailing.com/">
+    <meta property="twitter:title" content="Home Car Detailing - Detallado Profesional a Domicilio">
+    <meta property="twitter:description" content="Su detallador de confianza desde 2007. Especializado en servicios de detallado premium.">
+    <meta property="twitter:image" content="img/logo.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="img/logo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/logo.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/logo.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#000000">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#000000',
+                        'secondary': '#00ffff', // Cyan color from logo
+                        'accent': '#7fff00',    // Lime green from logo
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        .animate-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        .fade-in.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        [x-cloak] { display: none !important; }
+        body {
+            background: linear-gradient(to bottom, #000000, #00ffff);
+        }
+        .fixed {
+            position: fixed;
+        }
+        .bottom-4 {
+            bottom: 1rem;
+        }
+        .right-4 {
+            right: 1rem;
+        }
+        .z-50 {
+            z-index: 50;
+        }
+    </style>
+</head>
+<body class="bg-primary text-white font-sans" x-data="mainData">
+    <!-- Preloader -->
+    <div x-show="loading" class="fixed inset-0 z-50 flex items-center justify-center bg-primary">
+        <div class="text-center">
+            <img src="img/logo.png" alt="Home Car Detailing Logo" class="w-32 h-32 mx-auto mb-4 animate-pulse">
+            <div class="w-16 h-16 border-t-4 border-secondary border-solid rounded-full animate-spin mx-auto"></div>
+        </div>
+    </div>
+
+    <!-- Top Banner -->
+    <div class="bg-gradient-to-r from-primary to-secondary text-white py-2 px-4 relative overflow-hidden">
+        <div class="flex transition-transform duration-500 ease-in-out max-w-4xl mx-auto" x-data="{ currentBanner: 0 }" x-init="setInterval(() => currentBanner = (currentBanner + 1) % 3, 5000)" :style="{ transform: `translateX(-${currentBanner * 100}%)` }">
+            <p class="text-sm w-full flex-shrink-0">
+                🎉 ¡Oferta especial para nuevos clientes! <a href="#contact" class="underline">Reserva ahora</a>
+            </p>
+            <p class="text-sm w-full flex-shrink-0">
+                🚗 Llama al +524493977765 para citas
+            </p>
+            <p class="text-sm w-full flex-shrink-0">
+                💼 ¡Su Detallador de Confianza desde 2007!
+            </p>
+        </div>
+        <div class="absolute right-4 top-1/2 transform -translate-y-1/2 space-x-2 z-10">
+            <a href="#" class="text-white hover:text-accent"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="text-white hover:text-accent"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="text-white hover:text-accent"><i class="fab fa-twitter"></i></a>
+        </div>
+    </div>
+
+    <!-- Header with Responsive Navigation -->
+    <header class="bg-primary bg-opacity-90 backdrop-blur-md fixed w-full z-40">
+        <nav class="container mx-auto px-4 py-3" x-data="{ open: false }">
+            <div class="flex justify-between items-center">
+                <a href="#" class="flex items-center">
+                    <img src="img/logo.png" alt="Home Car Detailing Logo" class="h-12 w-auto">
+                    <span class="ml-2 text-xl font-bold">Home Car Detailing</span>
+                </a>
+                <button @click="open = !open" class="md:hidden text-white focus:outline-none">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+                <div class="hidden md:flex space-x-4">
+                    <a href="#about" class="hover:text-secondary transition">Nosotros</a>
+                    <a href="#services" class="hover:text-secondary transition">Servicios</a>
+                    <a href="#gallery" class="hover:text-secondary transition">Galería</a>
+                    <a href="#testimonials" class="hover:text-secondary transition">Testimonios</a>
+                    <a href="#contact" class="hover:text-secondary transition">Contacto</a>
+                </div>
+            </div>
+            <div x-show="open" class="md:hidden mt-3 space-y-2">
+                <a href="#about" class="block hover:text-secondary transition">Nosotros</a>
+                <a href="#services" class="block hover:text-secondary transition">Servicios</a>
+                <a href="#gallery" class="block hover:text-secondary transition">Galería</a>
+                <a href="#testimonials" class="block hover:text-secondary transition">Testimonios</a>
+                <a href="#contact" class="block hover:text-secondary transition">Contacto</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="h-screen flex items-center justify-center relative overflow-hidden" x-data="{ currentSlide: 0 }" x-init="setInterval(() => currentSlide = (currentSlide + 1) % 3, 5000)">
+            <div class="absolute inset-0 z-0">
+                <div x-show="currentSlide === 0" x-transition:enter="transition ease-out duration-1000" x-transition:enter-start="opacity-0 transform translate-x-full" x-transition:enter-end="opacity-100 transform translate-x-0" x-transition:leave="transition ease-in duration-1000" x-transition:leave-start="opacity-100 transform translate-x-0" x-transition:leave-end="opacity-0 transform -translate-x-full" class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1494905998402-395d579af36f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');"></div>
+                <div x-show="currentSlide === 1" x-transition:enter="transition ease-out duration-1000" x-transition:enter-start="opacity-0 transform translate-x-full" x-transition:enter-end="opacity-100 transform translate-x-0" x-transition:leave="transition ease-in duration-1000" x-transition:leave-start="opacity-100 transform translate-x-0" x-transition:leave-end="opacity-0 transform -translate-x-full" class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');"></div>
+                <div x-show="currentSlide === 2" x-transition:enter="transition ease-out duration-1000" x-transition:enter-start="opacity-0 transform translate-x-full" x-transition:enter-end="opacity-100 transform translate-x-0" x-transition:leave="transition ease-in duration-1000" x-transition:leave-start="opacity-100 transform translate-x-0" x-transition:leave-end="opacity-0 transform -translate-x-full" class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');"></div>
+            </div>
+            <div class="text-center z-10 bg-primary bg-opacity-50 p-8 rounded-lg max-w-3xl mx-auto">
+                <h2 class="text-2xl md:text-3xl lg:text-4xl font-semibold mb-4">Detallado Profesional a Domicilio</h2>
+                <p class="text-lg md:text-xl mb-8">Juan Pablo, Detallador Profesional con 16 años de experiencia</p>
+                <p class="text-lg md:text-xl mb-8">Aguascalientes, México</p>
+                <p class="text-lg md:text-xl mb-8">Contamos con servicios también sábados y domingos</p>
+                <div class="space-x-4">
+                    <a href="#services" class="bg-secondary text-primary px-6 py-2 md:px-8 md:py-3 rounded-full hover:bg-opacity-80 transition text-sm md:text-base">Nuestros Servicios</a>
+                    <a href="#contact" class="bg-transparent border-2 border-secondary text-secondary px-6 py-2 md:px-8 md:py-3 rounded-full hover:bg-secondary hover:text-primary transition text-sm md:text-base">Contáctanos</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="py-16 md:py-20 bg-primary">
+            <div class="container mx-auto px-4">
+                <h2 class="text-2xl md:text-3xl font-bold mb-8 md:mb-12 text-center fade-in">Nuestros Servicios</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                    <div class="bg-accent bg-opacity-10 p-6 rounded-lg shadow-lg hover:shadow-xl transition text-center fade-in cursor-pointer" @click="modalOpen = true; modalContent = { title: 'Detallado Premium', image: 'https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80', description: 'Nuestro servicio de detallado premium incluye una limpieza exhaustiva del interior y exterior de su vehículo, restaurándolo a condiciones de exhibición.' }">
+                        <img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Detallado Premium" class="w-full h-48 object-cover rounded-lg mb-4">
+                        <i class="fas fa-car-alt text-3xl md:text-4xl text-secondary mb-4"></i>
+                        <h3 class="text-lg md:text-xl font-semibold mb-4">Detallado Premium</h3>
+                        <p class="mb-4 text-sm md:text-base">Servicios completos de detallado interior y exterior.</p>
+                    </div>
+                    <div class="bg-accent bg-opacity-10 p-6 rounded-lg shadow-lg hover:shadow-xl transition text-center fade-in cursor-pointer" @click="modalOpen = true; modalContent = { title: 'Corrección de Pintura', image: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80', description: 'Nuestro servicio de corrección de pintura elimina imperfecciones de la pintura de su vehículo, restaurando su brillo y suavidad original.' }">
+                        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Corrección de Pintura" class="w-full h-48 object-cover rounded-lg mb-4">
+                        <i class="fas fa-paint-roller text-3xl md:text-4xl text-secondary mb-4"></i>
+                        <h3 class="text-lg md:text-xl font-semibold mb-4">Corrección de Pintura</h3>
+                        <p class="mb-4 text-sm md:text-base">Restaure la pintura de su vehículo a su gloria original.</p>
+                    </div>
+                    <div class="bg-accent bg-opacity-10 p-6 rounded-lg shadow-lg hover:shadow-xl transition text-center fade-in cursor-pointer" @click="modalOpen = true; modalContent = { title: 'Recubrimiento Cerámico', image: 'https://images.unsplash.com/photo-1563720223185-11003d516935?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80', description: 'Nuestro servicio de recubrimiento cerámico proporciona una protección duradera para la pintura de su vehículo, mejorando su brillo y facilitando su limpieza.' }">
+                        <img src="https://images.unsplash.com/photo-1563720223185-11003d516935?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Recubrimiento Cerámico" class="w-full h-48 object-cover rounded-lg mb-4">
+                        <i class="fas fa-shield-alt text-3xl md:text-4xl text-secondary mb-4"></i>
+                        <h3 class="text-lg md:text-xl font-semibold mb-4">Recubrimiento Cerámico</h3>
+                        <p class="mb-4 text-sm md:text-base">Protección duradera y brillo para su vehículo.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery" class="py-16 md:py-20 bg-gradient-to-b from-primary to-secondary">
+            <div class="container mx-auto px-4">
+                <h2 class="text-2xl md:text-3xl font-bold mb-8 md:mb-12 text-center fade-in">Nuestro Trabajo</h2>
+                <div class="flex flex-wrap justify-center space-x-2 md:space-x-4 mb-6 md:mb-8 fade-in">
+                    <button @click="activeFilter = 'all'" 
+                            :class="{ 'bg-secondary text-primary': activeFilter === 'all' }"
+                            class="px-3 py-1 md:px-4 md:py-2 rounded-full bg-accent bg-opacity-10 hover:bg-secondary hover:text-primary transition mb-2 text-sm md:text-base">Todos</button>
+                    <button @click="activeFilter = 'detailing'"
+                            :class="{ 'bg-secondary text-primary': activeFilter === 'detailing' }"
+                            class="px-3 py-1 md:px-4 md:py-2 rounded-full bg-accent bg-opacity-10 hover:bg-secondary hover:text-primary transition mb-2 text-sm md:text-base">Detallado</button>
+                    <button @click="activeFilter = 'paint'"
+                            :class="{ 'bg-secondary text-primary': activeFilter === 'paint' }"
+                            class="px-3 py-1 md:px-4 md:py-2 rounded-full bg-accent bg-opacity-10 hover:bg-secondary hover:text-primary transition mb-2 text-sm md:text-base">Corrección de Pintura</button>
+                    <button @click="activeFilter = 'ceramic'"
+                            :class="{ 'bg-secondary text-primary': activeFilter === 'ceramic' }"
+                            class="px-3 py-1 md:px-4 md:py-2 rounded-full bg-accent bg-opacity-10 hover:bg-secondary hover:text-primary transition mb-2 text-sm md:text-base">Recubrimiento Cerámico</button>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div x-show="activeFilter === 'all' || activeFilter === 'detailing'"
+                         class="bg-accent bg-opacity-10 h-48 md:h-64 rounded-lg overflow-hidden cursor-pointer fade-in"
+                         @click.prevent="modalOpen = true; modalContent = { title: 'Detallado Premium', image: 'https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80', description: 'Este vehículo recibió nuestro servicio de detallado premium, restaurando su acabado brillante.' }">
+                        <img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Ejemplo de Detallado Premium" class="w-full h-full object-cover">
+                    </div>
+                    <div x-show="activeFilter === 'all' || activeFilter === 'paint'"
+                         class="bg-accent bg-opacity-10 h-48 md:h-64 rounded-lg overflow-hidden cursor-pointer fade-in"
+                         @click.prevent="modalOpen = true; modalContent = { title: 'Corrección de Pintura', image: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80', description: 'La pintura de este auto fue corregida para eliminar marcas de remolino y rayones, restaurando su brillo.' }">
+                        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Ejemplo de Corrección de Pintura" class="w-full h-full object-cover">
+                    </div>
+                    <div x-show="activeFilter === 'all' || activeFilter === 'ceramic'"
+                         class="bg-accent bg-opacity-10 h-48 md:h-64 rounded-lg overflow-hidden cursor-pointer fade-in"
+                         @click.prevent="modalOpen = true; modalContent = { title: 'Recubrimiento Cerámico', image: 'https://images.unsplash.com/photo-1563720223185-11003d516935?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80', description: 'Este vehículo recibió nuestro tratamiento de recubrimiento cerámico para una protección duradera y brillo.' }">
+                        <img src="https://images.unsplash.com/photo-1563720223185-11003d516935?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Ejemplo de Recubrimiento Cerámico" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="py-16 md:py-20 bg-primary">
+            <div class="container mx-auto px-4">
+                <h2 class="text-2xl md:text-3xl font-bold mb-8 md:mb-12 text-center fade-in">Lo que Dicen Nuestros Clientes</h2>
+                <div x-data="{ activeSlide: 0 }" class="relative">
+                    <div class="overflow-hidden">
+                        <div class="flex transition-transform duration-300 ease-in-out" :style="{ transform: `translateX(-${activeSlide * 100}%)` }">
+                            <!-- Testimonial 1 -->
+                            <div class="w-full flex-shrink-0 px-4">
+                                <div class="bg-accent bg-opacity-10 p-6 rounded-lg shadow-lg">
+                                    <div class="flex items-center mb-4">
+                                        <img src="https://via.placeholder.com/60x60" alt="Cliente" class="w-12 h-12 rounded-full mr-4">
+                                        <div>
+                                            <h4 class="font-semibold">Juan Pérez</h4>
+                                            <div class="flex text-secondary">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="mb-4">"Home Car Detailing transformó mi auto! Su atención al detalle es inigualable. ¡Altamente recomendado!"</p>
+                                    <p class="text-sm text-gray-400">Hace 2 semanas</p>
+                                </div>
+                            </div>
+                            <!-- Testimonial 2 -->
+                            <div class="w-full flex-shrink-0 px-4">
+                                <div class="bg-accent bg-opacity-10 p-6 rounded-lg shadow-lg">
+                                    <div class="flex items-center mb-4">
+                                        <img src="https://via.placeholder.com/60x60" alt="Cliente" class="w-12 h-12 rounded-full mr-4">
+                                        <div>
+                                            <h4 class="font-semibold">María González</h4>
+                                            <div class="flex text-secondary">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star-half-alt"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="mb-4">"Estoy asombrada de cómo restauraron la pintura de mi auto viejo. ¡Se ve como nuevo! Gran servicio y personal amigable."</p>
+                                    <p class="text-sm text-gray-400">Hace 1 mes</p>
+                                </div>
+                            </div>
+                            <!-- Testimonial 3 -->
+                            <div class="w-full flex-shrink-0 px-4">
+                                <div class="bg-accent bg-opacity-10 p-6 rounded-lg shadow-lg">
+                                    <div class="flex items-center mb-4">
+                                        <img src="https://via.placeholder.com/60x60" alt="Cliente" class="w-12 h-12 rounded-full mr-4">
+                                        <div>
+                                            <h4 class="font-semibold">Carlos Rodríguez</h4>
+                                            <div class="flex text-secondary">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="mb-4">"El recubrimiento cerámico que aplicaron ha hecho que mantener el brillo de mi auto sea mucho más fácil. ¡Vale cada centavo!"</p>
+                                    <p class="text-sm text-gray-400">Hace 3 semanas</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Navigation arrows -->
+                    <button @click="activeSlide = (activeSlide - 1 + 3) % 3" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-secondary text-primary rounded-full p-2 focus:outline-none">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button @click="activeSlide = (activeSlide + 1) % 3" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-secondary text-primary rounded-full p-2 focus:outline-none">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQs Section -->
+        <section id="faqs" class="py-16 md:py-20 bg-gradient-to-b from-primary to-secondary">
+            <div class="container mx-auto px-4">
+                <h2 class="text-2xl md:text-3xl font-bold mb-8 md:mb-12 text-center fade-in">Preguntas Frecuentes</h2>
+                <div class="max-w-3xl mx-auto" x-data="{ activeTab: 0 }">
+                    <div class="mb-4 fade-in">
+                        <button @click="activeTab = 0" class="w-full text-left p-4 bg-accent bg-opacity-10 rounded-lg focus:outline-none" :class="{ 'bg-secondary text-primary': activeTab === 0 }">
+                            <span class="font-semibold">¿Qué servicios ofrecen?</span>
+                            <i class="fas fa-chevron-down float-right" :class="{ 'transform rotate-180': activeTab === 0 }"></i>
+                        </button>
+                        <div x-show="activeTab === 0" class="mt-2 p-4 bg-accent bg-opacity-5 rounded-lg">
+                            Ofrecemos una amplia gama de servicios de detallado automotriz que incluyen detallado interior y exterior, corrección de pintura, recubrimiento cerámico y más. Nuestro objetivo es restaurar y proteger la apariencia de su vehículo con los más altos estándares de calidad.
+                        </div>
+                    </div>
+                    <div class="mb-4 fade-in">
+                        <button @click="activeTab = 1" class="w-full text-left p-4 bg-accent bg-opacity-10 rounded-lg focus:outline-none" :class="{ 'bg-secondary text-primary': activeTab === 1 }">
+                            <span class="font-semibold">¿Cuánto tiempo toma un detallado completo?</span>
+                            <i class="fas fa-chevron-down float-right" :class="{ 'transform rotate-180': activeTab === 1 }"></i>
+                        </button>
+                        <div x-show="activeTab === 1" class="mt-2 p-4 bg-accent bg-opacity-5 rounded-lg">
+                            El tiempo puede variar dependiendo del tamaño del vehículo y el nivel de detallado requerido. Un detallado completo generalmente toma entre 4 a 8 horas. Para trabajos más extensos como corrección de pintura o aplicación de recubrimiento cerámico, puede tomar hasta un día completo o más.
+                        </div>
+                    </div>
+                    <div class="mb-4 fade-in">
+                        <button @click="activeTab = 2" class="w-full text-left p-4 bg-accent bg-opacity-10 rounded-lg focus:outline-none" :class="{ 'bg-secondary text-primary': activeTab === 2 }">
+                            <span class="font-semibold">¿Ofrecen servicios a domicilio?</span>
+                            <i class="fas fa-chevron-down float-right" :class="{ 'transform rotate-180': activeTab === 2 }"></i>
+                        </button>
+                        <div x-show="activeTab === 2" class="mt-2 p-4 bg-accent bg-opacity-5 rounded-lg">
+                            Sí, ofrecemos servicios de detallado a domicilio para su comodidad. Nuestro equipo móvil está equipado con todo lo necesario para proporcionar un servicio de alta calidad en la ubicación de su elección, ya sea en su casa o lugar de trabajo.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-16 md:py-20 bg-primary">
+            <div class="container mx-auto px-4">
+                <h2 class="text-2xl md:text-3xl font-bold mb-8 md:mb-12 text-center fade-in">Contáctanos</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="fade-in">
+                        <form id="contactForm" @submit.prevent="submitForm">
+                            <div class="mb-4">
+                                <label for="name" class="block mb-2">Nombre</label>
+                                <input type="text" id="name" name="name" class="w-full px-3 py-2 bg-accent bg-opacity-10 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary" required>
+                            </div>
+                            <div class="mb-4">
+                                <label for="email" class="block mb-2">Email</label>
+                                <input type="email" id="email" name="email" class="w-full px-3 py-2 bg-accent bg-opacity-10 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary" required>
+                            </div>
+                            <div class="mb-4">
+                                <label for="service" class="block mb-2">Servicio</label>
+                                <select id="service" name="service" class="w-full px-3 py-2 bg-accent bg-opacity-10 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary" required>
+                                    <option value="">Seleccione un servicio</option>
+                                    <option value="Detallado Premium">Detallado Premium</option>
+                                    <option value="Corrección de Pintura">Corrección de Pintura</option>
+                                    <option value="Recubrimiento Cerámico">Recubrimiento Cerámico</option>
+                                </select>
+                            </div>
+                            <div class="mb-4">
+                                <label for="message" class="block mb-2">Mensaje</label>
+                                <textarea id="message" name="message" rows="4" class="w-full px-3 py-2 bg-accent bg-opacity-10 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary" required></textarea>
+                            </div>
+                            <button type="submit" class="bg-secondary text-primary px-6 py-2 rounded-full hover:bg-opacity-80 transition">Enviar Mensaje</button>
+                        </form>
+                    </div>
+                    <div class="fade-in">
+                        <h3 class="text-xl font-semibold mb-4">Información de Contacto</h3>
+                        <p class="mb-2"><i class="fas fa-map-marker-alt mr-2 text-secondary"></i> Aguascalientes, México</p>
+                        <p class="mb-2"><i class="fas fa-phone mr-2 text-secondary"></i> +52 449 397 7765</p>
+                        <p class="mb-2"><i class="fas fa-envelope mr-2 text-secondary"></i> info@homecardetailing.com</p>
+                        <div class="mt-6">
+                            <h4 class="text-lg font-semibold mb-2">Síguenos</h4>
+                            <div class="flex space-x-4">
+                                <a href="#" class="text-secondary hover:text-accent transition"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="text-secondary hover:text-accent transition"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="text-secondary hover:text-accent transition"><i class="fab fa-twitter"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <img src="img/logo.png" alt="Home Car Detailing Logo" class="h-12 w-auto mb-4">
+                    <h3 class="text-xl font-semibold mb-4">Home Car Detailing</h3>
+                    <p>Su detallador de confianza desde 2007. Ofreciendo servicios de detallado premium en Aguascalientes.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Enlaces Rápidos</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#about" class="hover:text-secondary transition">Nosotros</a></li>
+                        <li><a href="#services" class="hover:text-secondary transition">Servicios</a></li>
+                        <li><a href="#gallery" class="hover:text-secondary transition">Galería</a></li>
+                        <li><a href="#testimonials" class="hover:text-secondary transition">Testimonios</a></li>
+                        <li><a href="#contact" class="hover:text-secondary transition">Contacto</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Horario de Atención</h3>
+                    <p>Lunes - Viernes: 9:00 AM - 6:00 PM</p>
+                    <p>Sábado: 10:00 AM - 4:00 PM</p>
+                    <p>Domingo: Cerrado</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center">
+                <p>&copy; 2024 Home Car Detailing. Todos los derechos reservados.</p>
+                <p class="text-sm text-gray-400">Powered by Duality Domain</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div x-show="modalOpen" x-cloak class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div x-show="modalOpen" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+            <div x-show="modalOpen" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" class="inline-block align-bottom bg-primary rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                <div class="bg-primary px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div class="sm:flex sm:items-start">
+                        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                            <h3 class="text-lg leading-6 font-medium text-white" id="modal-title" x-text="modalContent.title"></h3>
+                            <div class="mt-2">
+                                <img :src="modalContent.image" :alt="modalContent.title" class="w-full h-48 object-cover rounded-lg mb-4">
+                                <p class="text-sm text-gray-300" x-text="modalContent.description"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-primary px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                    <button type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-secondary text-base font-medium text-primary hover:bg-opacity-80 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary sm:ml-3 sm:w-auto sm:text-sm" @click="modalOpen = false">
+                        Cerrar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/524493977765" target="_blank" class="fixed bottom-4 right-4 bg-green-500 text-white p-3 rounded-full shadow-lg z-50">
+        <i class="fab fa-whatsapp text-2xl"></i>
+    </a>
+
+    <!-- Scroll to top button -->
+    <button id="scrollToTopBtn" class="fixed bottom-4 left-4 bg-secondary text-primary p-2 rounded-full shadow-lg z-50 hidden" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script>
+        // Fade-in animation
+        function handleIntersection(entries, observer) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('appear');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }
+
+        const observer = new IntersectionObserver(handleIntersection, { threshold: 0.1 });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Scroll to top button visibility
+        window.addEventListener('scroll', function() {
+            var scrollToTopBtn = document.getElementById('scrollToTopBtn');
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.remove('hidden');
+            } else {
+                scrollToTopBtn.classList.add('hidden');
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Inicialización explícita de Alpine
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('mainData', () => ({
+                mobileMenu: false,
+                currentSlide: 0,
+                loading: false,
+                currentBanner: 0,
+                activeFilter: 'all',
+                modalOpen: false,
+                modalContent: null,
+                init() {
+                    console.log('Alpine initialized');
+                },
+                submitForm(event) {
+                    event.preventDefault();
+                    const formData = new FormData(event.target);
+                    const name = formData.get('name');
+                    const email = formData.get('email');
+                    const service = formData.get('service');
+                    const message = formData.get('message');
+                    
+                    // Construir el mensaje para WhatsApp
+                    const whatsappMessage = `Nuevo mensaje de contacto:%0A%0ANombre: ${name}%0AEmail: ${email}%0AServicio: ${service}%0AMensaje: ${message}`;
+                    
+                    // Abrir WhatsApp con el mensaje pre-llenado
+                    window.open(`https://wa.me/524493977765?text=${whatsappMessage}`, '_blank');
+                    
+                    // Limpiar el formulario
+                    event.target.reset();
+                }
+            }));
+        });
+    </script>
+</body>
+</html>
